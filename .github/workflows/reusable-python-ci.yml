@@ -48,7 +48,8 @@ jobs:
     uses: ./.github/workflows/reusable-commit-check.yml
     with:
       python-version: ${{ inputs.python-version }}
-    secrets: inherit
+    secrets:
+      organization_access_token: ${{ secrets.organization_access_token }}
   
   format-check:
     if: ${{ !inputs.skip-format-check }}
@@ -57,7 +58,8 @@ jobs:
       python-version: ${{ inputs.python-version }}
       ruff-config-path: ${{ inputs.ruff-config-path }}
       install-command: ${{ inputs.install-command }}
-    secrets: inherit
+    secrets:
+      organization_access_token: ${{ secrets.organization_access_token }}
   
   type-check:
     if: ${{ !inputs.skip-type-check }}
@@ -65,7 +67,8 @@ jobs:
     with:
       python-version: ${{ inputs.python-version }}
       install-command: ${{ inputs.install-command }}
-    secrets: inherit
+    secrets:
+      organization_access_token: ${{ secrets.organization_access_token }}
   
   tests:
     if: ${{ !inputs.skip-tests }}
