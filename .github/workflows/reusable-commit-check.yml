@@ -8,6 +8,10 @@ on:
         required: false
         type: string
         default: '3.11'
+    secrets:
+      ORG_CI_TOKEN:
+        description: 'Token for accessing org repos'
+        required: true
 
 jobs:
   check-commit-logs:
@@ -26,7 +30,7 @@ jobs:
       with:
         repository: ${{ github.repository_owner }}/.github
         path: .ci-shared
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.ORG_CI_TOKEN }}
         sparse-checkout: |
           scripts
     

@@ -18,6 +18,10 @@ on:
         required: false
         type: string
         default: 'pip install -e ".[dev]"'
+    secrets:
+      ORG_CI_TOKEN:
+        description: 'Token for accessing org repos'
+        required: true
 
 jobs:
   code-format-check:
@@ -36,7 +40,7 @@ jobs:
       with:
         repository: ${{ github.repository_owner }}/.github
         path: .ci-shared
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.ORG_CI_TOKEN }}
         sparse-checkout: |
           scripts
           configs
