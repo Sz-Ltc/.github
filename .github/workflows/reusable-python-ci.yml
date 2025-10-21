@@ -39,8 +39,7 @@ on:
         type: boolean
         default: false
     secrets:
-      ORG_CI_TOKEN:
-        description: 'Token for accessing organization repositories'
+      organization_access_token:
         required: true
 
 jobs:
@@ -49,8 +48,7 @@ jobs:
     uses: ./.github/workflows/reusable-commit-check.yml
     with:
       python-version: ${{ inputs.python-version }}
-    secrets:
-      ORG_CI_TOKEN: ${{ secrets.ORG_CI_TOKEN }}
+    secrets: inherit
   
   format-check:
     if: ${{ !inputs.skip-format-check }}
@@ -59,8 +57,7 @@ jobs:
       python-version: ${{ inputs.python-version }}
       ruff-config-path: ${{ inputs.ruff-config-path }}
       install-command: ${{ inputs.install-command }}
-    secrets:
-      ORG_CI_TOKEN: ${{ secrets.ORG_CI_TOKEN }}
+    secrets: inherit
   
   type-check:
     if: ${{ !inputs.skip-type-check }}
@@ -68,8 +65,7 @@ jobs:
     with:
       python-version: ${{ inputs.python-version }}
       install-command: ${{ inputs.install-command }}
-    secrets:
-      ORG_CI_TOKEN: ${{ secrets.ORG_CI_TOKEN }}
+    secrets: inherit
   
   tests:
     if: ${{ !inputs.skip-tests }}
