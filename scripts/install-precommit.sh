@@ -28,7 +28,7 @@ else
 fi
 
 # Download ruff config if not exists
-if [ ! -f ruff.toml ] && [ ! -f pyproject.toml ]; then
+if [ ! -f ruff.toml ]; then
     echo "📥 Downloading organization ruff config..."
     curl -sSL https://raw.githubusercontent.com/Sz-Ltc/.github/main/configs/ruff.toml \
         -o ruff.toml
