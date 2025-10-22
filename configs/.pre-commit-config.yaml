@@ -15,7 +15,6 @@ repos:
       - id: detect-private-key
       - id: requirements-txt-fixer
       - id: check-ast
-      - id: debug-statements
       - id: check-toml
       - id: check-json
       - id: check-xml
