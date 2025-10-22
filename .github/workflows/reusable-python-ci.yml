@@ -38,14 +38,28 @@ on:
         required: false
         type: boolean
         default: false
+      skip-precommit:
+        description: 'Skip pre-commit checks'
+        required: false
+        type: boolean
+        default: false  
     secrets:
       organization_access_token:
         required: true
 
 jobs:
+  pre-commit:
+    if: ${{ !inputs.skip-precommit }}
+    uses: ./.github/.github/workflows/reusable-precommit.yml@main
+    with:
+      python-version: ${{ inputs.python-version }}
+    secrets:
+      organization_access_token: ${{ secrets.organization_access_token }}
+  
   commit-check:
     if: ${{ !inputs.skip-commit-check }}
-    uses: ./.github/workflows/reusable-commit-check.yml
+    needs: pre-commit
+    uses: ./.github/workflows/reusable-commit-check.yml@main
     with:
       python-version: ${{ inputs.python-version }}
     secrets:
@@ -53,7 +67,8 @@ jobs:
   
   format-check:
     if: ${{ !inputs.skip-format-check }}
-    uses: ./.github/workflows/reusable-format-check.yml
+    needs: pre-commit
+    uses: ./.github/workflows/reusable-format-check.yml@main
     with:
       python-version: ${{ inputs.python-version }}
       ruff-config-path: ${{ inputs.ruff-config-path }}
@@ -63,7 +78,8 @@ jobs:
   
   type-check:
     if: ${{ !inputs.skip-type-check }}
-    uses: ./.github/workflows/reusable-type-check.yml
+    needs: pre-commit
+    uses: ./.github/workflows/reusable-type-check.yml@main
     with:
       python-version: ${{ inputs.python-version }}
       install-command: ${{ inputs.install-command }}
@@ -72,7 +88,8 @@ jobs:
   
   tests:
     if: ${{ !inputs.skip-tests }}
-    uses: ./.github/workflows/reusable-tests.yml
+    needs: pre-commit
+    uses: ./.github/workflows/reusable-tests.yml@main
     with:
       python-version: ${{ inputs.python-version }}
       install-command: ${{ inputs.install-command }}
