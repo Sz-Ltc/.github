@@ -40,7 +40,7 @@ pre-commit install
 pre-commit install --hook-type commit-msg
 
 # Optional: Run on all files
-read -p "🔍 Run pre-commit on all files now? (y/N) " -n 1 -r
+read -p "🔍 Run pre-commit on all files now? (y/N) " -n 1 -r < /dev/tty
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     echo "🚀 Running pre-commit on all files..."
