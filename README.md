@@ -25,7 +25,7 @@ jobs:
     with:
       python-version: '3.11'
     secrets:
-      ORG_CI_TOKEN: ${{ secrets.ORG_CI_TOKEN }}
+      organization_access_token: ${{ secrets.ORGANIZATION_ACCESS_TOKEN }}
 EOF
 
 # 3. 提交并推送
