@@ -7,9 +7,7 @@
 ### 新项目设置
 ```bash
 # 1. 安装 pre-commit hooks
-curl -sSL https://raw.githubusercontent.com/Sz-Ltc/.github/main/scripts/install-precommit.sh
-
-bash install-precommit.sh
+curl -sSL https://raw.githubusercontent.com/Sz-Ltc/.github/main/scripts/install-precommit.sh | bash
 
 # 2. 在项目中添加 CI workflow
 cat > .github/workflows/ci.yml << 'EOF'
