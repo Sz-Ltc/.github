@@ -8,9 +8,6 @@ on:
         required: false
         type: string
         default: '3.11'
-    secrets:
-      organization_access_token:
-        required: true
 
 jobs:
   check-commit-logs:
@@ -29,7 +26,6 @@ jobs:
       with:
         repository: ${{ github.repository_owner }}/.github
         path: .ci-shared
-        repo-token: ${{ secrets.organization_access_token }}
         sparse-checkout: |
           scripts
     
