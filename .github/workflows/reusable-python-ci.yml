@@ -43,9 +43,6 @@ on:
         required: false
         type: boolean
         default: false  
-    secrets:
-      organization_access_token:
-        required: true
 
 jobs:
   pre-commit:
@@ -53,8 +50,6 @@ jobs:
     uses: ./.github/workflows/reusable-precommit.yml
     with:
       python-version: ${{ inputs.python-version }}
-    secrets:
-      organization_access_token: ${{ secrets.organization_access_token }}
   
   commit-check:
     if: ${{ !inputs.skip-commit-check }}
@@ -62,8 +57,6 @@ jobs:
     uses: ./.github/workflows/reusable-commit-check.yml
     with:
       python-version: ${{ inputs.python-version }}
-    secrets:
-      organization_access_token: ${{ secrets.organization_access_token }}
   
   format-check:
     if: ${{ !inputs.skip-format-check }}
@@ -73,8 +66,6 @@ jobs:
       python-version: ${{ inputs.python-version }}
       ruff-config-path: ${{ inputs.ruff-config-path }}
       install-command: ${{ inputs.install-command }}
-    secrets:
-      organization_access_token: ${{ secrets.organization_access_token }}
   
   type-check:
     if: ${{ !inputs.skip-type-check }}
@@ -83,8 +74,6 @@ jobs:
     with:
       python-version: ${{ inputs.python-version }}
       install-command: ${{ inputs.install-command }}
-    secrets:
-      organization_access_token: ${{ secrets.organization_access_token }}
   
   tests:
     if: ${{ !inputs.skip-tests }}
