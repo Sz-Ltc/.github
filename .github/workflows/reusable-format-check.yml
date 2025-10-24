@@ -18,9 +18,6 @@ on:
         required: false
         type: string
         default: 'pip install -e ".[dev]"'
-    secrets:
-      organization_access_token:
-        required: true
 
 jobs:
   code-format-check:
@@ -39,7 +36,6 @@ jobs:
       with:
         repository: ${{ github.repository_owner }}/.github
         path: .ci-shared
-        repo-token: ${{ secrets.organization_access_token }}
         sparse-checkout: |
           scripts
           configs
